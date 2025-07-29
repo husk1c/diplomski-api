@@ -14,7 +14,7 @@ app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send(
-    "<p>Auto Otpad X API, dokumentacija: <a>https://github.com/husk1c/diplomski-api</a></p>"
+    "<p>Auto Otpad X API, dokumentacija: <a href='https://github.com/husk1c/diplomski-api'>Github documentation</a></p>"
   );
 });
 
