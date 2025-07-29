@@ -40,6 +40,7 @@ async function uploadPic(req, res, next) {
       req.file.forEach((picture) => {
         artikal.slike.push(picture.path);
       });
+      await artikal.save();
       res.json({
         status: "success",
         data: "Slike uspješno postavljene.",

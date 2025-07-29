@@ -56,7 +56,7 @@ async function editModel(req, res, next) {
 }
 async function deleteModel(req, res, next) {
   try {
-    const model = Model.findById(req.params.id);
+    const model = await Model.findById(req.params.id);
     await model.delete();
 
     res.json({
@@ -72,7 +72,7 @@ async function createBrand(req, res, next) {
   if (!naziv) {
     next(appError("Unesite naziv brenda."));
   }
-  const isFound = Brend.findOne({ naziv });
+  const isFound = await Brend.findOne({ naziv });
   if (isFound) {
     next(appError("Brend sa ovim nazivom već postoji."));
   }
@@ -125,7 +125,7 @@ async function editBrand(req, res, next) {
 
 async function deleteBrand(req, res, next) {
   try {
-    const brend = Brend.findById(req.params.id);
+    const brend = await Brend.findById(req.params.id);
     if (!brend) {
       return next(appError("Brend nije pronađen."));
     }

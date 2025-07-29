@@ -35,7 +35,7 @@ async function editSubCategory(req, res, next) {
     if (!naziv) {
       return next(appError("Unesite naziv podkategorije."));
     }
-    const podkategorija = Podkategorija.findById(req.params.id);
+    const podkategorija = await Podkategorija.findById(req.params.id);
     if (podkategorija.naziv.toString() === naziv.toString()) {
       return next(appError("Unešeni naziv je isti."));
     }
@@ -58,7 +58,7 @@ async function editSubCategory(req, res, next) {
 }
 async function deleteSubCategory(req, res, next) {
   try {
-    const podkateogrija = Podkategorija.findById(req.params.id);
+    const podkateogrija = await Podkategorija.findById(req.params.id);
     await podkateogrija.delete();
 
     res.json({
@@ -74,7 +74,7 @@ async function createCategory(req, res, next) {
   if (!naziv) {
     next(appError("Unesite naziv kategorije."));
   }
-  const isFound = Kategorija.findOne({ naziv });
+  const isFound = await Kategorija.findOne({ naziv });
   if (isFound) {
     next(appError("Kategorija sa ovim nazivom već postoji."));
   }
@@ -127,7 +127,7 @@ async function editCategory(req, res, next) {
 
 async function deleteCategory(req, res, next) {
   try {
-    const kateogrija = Kategorija.findById(req.params.id);
+    const kateogrija = await Kategorija.findById(req.params.id);
     if (!kateogrija) {
       return next(appError("Kategorija nije pronađena."));
     }

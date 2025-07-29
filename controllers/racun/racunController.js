@@ -30,6 +30,8 @@ async function createReceipt(req, res, next) {
     krajGarancije.setMonth(krajGarancije.getMonth() + artikal.garantniPeriod);
     racun.istekGarancije = krajGarancije;
 
+    await racun.save();
+
     res.json({
       status: "success",
       data: racun,

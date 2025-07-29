@@ -6,7 +6,7 @@ const Radnik = require("../../model/Radnik/Radnik");
 async function createWorker(req, res, next) {
   const { ime, prezime, uloga, username, password } = req.body;
   try {
-    const exists = Radnik.findOne({ username });
+    const exists = await Radnik.findOne({ username });
     if (exists) {
       return next(appError("Username je zauzet."));
     }
@@ -41,6 +41,7 @@ async function loginWorker(req, res, next) {
     }
 
     radnik.zadnjiPristup = new Date();
+    await radnik.save({ validateBeforeSave: false });
 
     res.json({
       status: "success",
@@ -54,7 +55,7 @@ async function loginWorker(req, res, next) {
 }
 async function deleteWorker(req, res, next) {
   try {
-    const radnik = Radnik.findById(req.params.id);
+    const radnik = await Radnik.findById(req.params.id);
     await radnik.delete();
     res.json({
       status: "success",
