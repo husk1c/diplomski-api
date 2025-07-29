@@ -13,7 +13,9 @@ const app = express();
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("Auto Otpad X API, dokumentacija: ");
+  res.send(
+    "<p>Auto Otpad X API, dokumentacija: <a>https://github.com/husk1c/diplomski-api</a></p>"
+  );
 });
 
 app.use("/api/v1/kategorija", kategorijaRouter);
